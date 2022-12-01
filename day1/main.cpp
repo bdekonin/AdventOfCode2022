@@ -6,7 +6,7 @@
 /*   By: bdekonin <bdekonin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/12/01 15:50:24 by bdekonin      #+#    #+#                 */
-/*   Updated: 2022/12/01 16:19:43 by bdekonin      ########   odam.nl         */
+/*   Updated: 2022/12/01 16:34:58 by bdekonin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,21 +65,26 @@ int main(int argc, char **argv)
 		std::cout << "Error: no elves found" << std::endl;
 		return (1);
 	}
-
-	/* Calculate total calories */
-	Elf *biggestElf = nullptr;
-	biggestElf = elves[0];
-	if (elves.size() > 1)
+	else if (elves.size() == 1)
 	{
-		for (int i = 0; i < elves.size(); i++)
-		{
-			if (elves[i]->getCalories() > biggestElf->getCalories())
-				biggestElf = elves[i];
-		}
+		std::cout << "Error: only one elf found" << std::endl;
+		return (1);
 	}
+
+	std::sort(elves.begin(), elves.end(), [](Elf *a, Elf *b) { return a->getCalories() > b->getCalories(); });
+
+	/* Print elves */
+	for (int i = 0; i < elves.size(); i++)
+	{
+		std::cout << "Elf " << i + 1 << " has " << elves[i]->getCalories() << " calories" << std::endl;
+	}
+
+	/* Print awnsers */
+	std::cout << "Part One: " << elves[0]->getCalories() << std::endl;
+	std::cout << "Part Two: " << elves[0]->getCalories() + elves[1]->getCalories() + elves[2]->getCalories() << std::endl;
 	
 	/* Print total calories */
-	std::cout << "The elf carrying the most has " << biggestElf->getCalories() << " calories" << std::endl;
+	// std::cout << "The elf carrying the most has " << biggestElf->getCalories() << " calories" << std::endl;
 
 	/* Free Memory */
 	for (int i = 0; i < elves.size(); i++)
