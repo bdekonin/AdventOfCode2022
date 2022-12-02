@@ -20,13 +20,40 @@ myscore = 0
 # Y = Paper
 # Z = Scissors
 
-def setInput(input: str):
-	if (input == "A" or input == "X"):
+# X = Lose
+# Y = Draw
+# Z = Win
+
+def setInputOponent(input: str):
+	if (input == "A"):
 		return 1
-	elif (input == "B" or input == "Y"):
+	elif (input == "B"):
 		return 2
-	elif (input == "C" or input == "Z"):
+	elif (input == "C"):
 		return 3
+	else:
+		return "error"
+def setInputPersonal(oponent: str, personal: str):
+	if (personal == "Y"):
+		return setInputOponent(oponent) # Return the same as the oponent
+	elif (personal == "X"):
+		if (oponent == "A"):
+			return 3
+		elif (oponent == "B"):
+			return 1
+		elif (oponent == "C"):
+			return 2
+		else:
+			return "error"
+	elif (personal == "Z"):
+		if (oponent == "A"):
+			return 2
+		elif (oponent == "B"):
+			return 3
+		elif (oponent == "C"):
+			return 1
+		else:
+			return "error"
 	else:
 		return "error"
 
@@ -55,8 +82,8 @@ def win(personal, oponent):
 for line in lines:
 	# Split the string into a list of numbers
 	splittedline = line.split()
-	oponent = setInput(splittedline[0])
-	personal = setInput(splittedline[1])
+	oponent = setInputOponent(splittedline[0])
+	personal = setInputPersonal(splittedline[0], splittedline[1])
 
 	myscore += win(personal, oponent)
 	print (win(personal, oponent))
