@@ -1,7 +1,7 @@
 lines = open('input.txt').readlines()
 
+# Part 1
 score = 0;
-
 for line in lines:
 	# split line in half
 	first = line[:len(line)//2]
@@ -16,8 +16,28 @@ for line in lines:
 				score += (ord(c) - 96)
 				break;
 
-print(score)
+print('part 1: ', score)
 
+# Part 2
+i = 0;
+score = 0;
+chunks = [lines[i:i + 3] for i in range(0, len(lines), 3)]
+for chunk in chunks:
+	first = chunk[0]
+	second = chunk[1]
+	third = chunk[2]
+
+	for c in first:
+		if second.find(c) != -1:
+			if third.find(c) != -1:
+				if c.isupper():
+					score += (ord(c) - 38)
+					break;
+				else:
+					score += (ord(c) - 96)
+					break;
+
+print('part 2: ', score)
 
 # A = 27
 # B = 28
