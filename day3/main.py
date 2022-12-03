@@ -18,6 +18,7 @@ for line in lines:
 
 print('part 1: ', score)
 
+
 # Part 2
 i = 0;
 score = 0;
