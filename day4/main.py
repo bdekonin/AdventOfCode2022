@@ -1,6 +1,7 @@
 lines = open('input.txt').readlines()
 
-count = 0;
+partone = 0;
+parttwo = 0;
 for line in lines:
 	first, second = line.split(',')
 	f_value = first.split('-')
@@ -10,8 +11,14 @@ for line in lines:
 	c, d = int(s_value[0]), int(s_value[1])
 
 	if a <= c <= d <= b:
-		count += 1
+		partone += 1
 	elif c <= a <= b <= d:
-		count += 1
+		partone += 1
 
-print(count)
+	if a <= c <= b:
+		parttwo += 1
+	elif c <= a <= d:
+		parttwo += 1
+
+print('part 1: ', partone)
+print('part 2: ', parttwo)
